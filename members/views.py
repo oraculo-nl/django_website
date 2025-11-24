@@ -13,3 +13,10 @@ def hello_view(request):
     }
     return HttpResponse(template.render(context, request))
 
+def details(request, id):
+  mymember = Member.objects.get(id=id)
+  template = loader.get_template('members/details.html')
+  context = {
+    'mymember': mymember,
+  }
+  return HttpResponse(template.render(context, request))
