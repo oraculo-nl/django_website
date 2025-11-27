@@ -1,14 +1,32 @@
-<!DOCTYPE html>
+<!-- templates/base.html -->
+<!doctype html>
 <html>
 <head>
-  <title>{% block title %}{% endblock %}</title>
+    <meta charset="utf-8">
+    <title>{% block title %}Site{% endblock %}</title>
 </head>
 <body>
-
-{% block content %}
-{% endblock %}
-
-(c) ITMG 2025
-
+<header>
+    {% if user.is_authenticated %}
+    <span>Ingelogd als <strong>{{ user.get_username }}</strong></span>
+    <form action="{% url 'logout' %}" method="post" style="display:inline">
+        {% csrf_token %}
+        <button type="submit">Uitloggen</button>
+    </form>
+    {% if user.is_staff %}
+    <a href="{% url 'admin:index' %}">Admin</a>
+    {% endif %}
+    {% else %}
+    <a href="{% url 'login' %}?next={{ request.path }}">Inloggen</a>
+    {% endif %}
+</header>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% block content %}{% endblock %}
 </body>
 </html>

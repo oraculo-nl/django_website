@@ -23,10 +23,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-mvfs19rqcs-7=@+bc%ngnu^(!a9a-$xq#i(mc8qgv3_k76+^t0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1','*']
 
+
+LOGIN_URL = "login" # naam uit django.contrib.auth.urls
+LOGIN_REDIRECT_URL = "home" # na succesvol inloggen
+LOGOUT_REDIRECT_URL = "login" # na uitloggen
 
 # Application definition
 
